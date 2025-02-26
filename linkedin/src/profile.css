@@ -1,0 +1,337 @@
+/* Profile page */
+.profile-main {
+    padding: 20px;
+    padding-top: 80px;
+    width: 70vw;
+}
+
+.profile-main > div {
+    border: 0.5px solid grey;
+    border-radius: 10px;
+}
+
+.profile-sidebar {
+    flex-basis: 25%;
+    align-self: flex-start;
+    position: sticky;
+    top: 70px;
+}
+
+.profile-container {
+    background: #fff;
+}
+
+.profile-container > img {
+    width: 70vw;
+    border-radius: 3px;
+}
+
+.profile-container-inner {
+    padding: 0 4% 10px;
+}
+
+.profile-pic {
+    width: 150px;
+    border-radius: 50%;
+    margin-top: -70px;
+    padding: 5px;
+    background: #fff;
+}
+
+.profile-container {
+    font-size: 22px;
+    font-weight: 400;
+    color: #222;
+}
+
+.profile-container-inner > h2 {
+    margin-top: -3px;
+    margin-bottom: 3px;
+}
+
+.profile-container-inner > b {
+    font-weight: 300;
+}
+
+.profile-container-inner > p {
+    font-weight: 200;
+    margin-top: 5px;
+}
+
+.mutual-connection {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.mutual-connection > img {
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.profile-btn {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-btn a {
+    display: flex;
+    align-items: center;
+    background: #e4e6eb;
+    padding: 5px 15px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.profile-btn a img {
+    width: 18px;
+    margin-right: 4px;
+}
+
+.profile-btn .primary-btn {
+    background: #1469f1;
+    color: #fff;
+}
+
+.profile-description {
+    background: #fff;
+    padding: 20px 4% 30px;
+    margin: 40px 0;
+}
+
+.profile-description > h2 {
+    color: #333;
+    font-weight: 400;
+    margin: 10px 0 20px;
+}
+
+.profile-description > button {
+    float: right;
+    border: none;
+    cursor: pointer;
+}
+
+.see-more-link {
+    display: block;
+    text-align: right;
+    font-size: 14px;
+}
+
+.profile-desc-row {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.profile-desc-row img {
+    width: 100px;
+    margin-right: 25px;
+    margin-top: 5pxn ;
+}
+
+.profile-desc-row div {
+    width: 100%;
+}
+
+.profile-desc-row h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.profile-desc-row b {
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.profile-desc-row p {
+    margin-top: 14px;
+}
+
+.profile-desc-row hr {
+    border: 0;
+    border-bottom: 1px solid #999;
+    margin-top: 8px;
+}
+
+.skill-btn {
+    display: inline-block;
+    margin: 8px 4px;
+    padding: 5px 15px;
+    border: 1px solid #777;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+/* profile right sidebar */
+.profile-sidebar .sidebar-ad {
+    margin: 0;
+}
+
+.sidebar-people {
+    background: #fff;
+    padding: 15px 25px;
+    margin: 12px 0;
+    font-size: 12px;
+}
+
+.sidebar-people h3 {
+    font-size: 13px;
+    font-weight: 500;
+    margin: 10px 0 20px;
+}
+
+.sidebar-people-row {
+    display: flex;
+    align-items: flex-start;
+    margin: 6px 0;
+}
+
+.sidebar-people-row img {
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 6px;
+    margin-top: 4px;
+}
+
+.sidebar-people-row h2 {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.sidebar-people-row a {
+    display: inline-block;
+    padding: 5px 25px;
+    margin: 10px 0;
+    border-radius: 30px;
+    font-weight: 400;
+    border: 1px solid #807e7e
+}
+
+/* form styling for education and experience addition */
+.add-btn {
+    float: right;
+    margin-top: -55px;
+    outline: none;
+    border: none; 
+    cursor: pointer;
+}
+
+.btn-open-popup {
+    padding: 12px 24px;
+    font-size: 18px;
+    background-color: rgb(86, 151, 169);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-skills {
+    background-color: rgb(86, 151, 169);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    height: 23px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.overlay-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.popup-box {
+    background: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    width: 320px;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #444;
+    text-align: left;
+}
+
+.form-input {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-collection {
+    display: flex;
+    flex-direction: row;
+    margin-right: 2px;
+    align-self: center;
+}
+
+.btn-submit,
+.btn-close-popup {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-submit {
+    background-color: rgb(108, 179, 188);
+    color: #fff;
+}
+
+.btn-close-popup {
+    margin-top: 12px;
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+/* Animation for popup */
+.overlay-container.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Keyframes for fadeInUp animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
