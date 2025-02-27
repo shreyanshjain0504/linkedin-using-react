@@ -27,7 +27,6 @@ const Post = ({ post }) => {
 
 const PostsContainer = ({ posts }) => {
   useEffect(() => {
-    localStorage.getItem('filter');
     localStorage.removeItem('filter')
   }, [posts]);
 
