@@ -1,15 +1,14 @@
 import React from 'react'
 
-export function UpdatedComponent(OriginalComponent) {
-    function NewComponent() {
+export function WithNavbarRight(NavbarRight) {
+    return function NewComponent() {
         function toggleMenu() {
             /* adds and removes the class name open-menu whenever called */
             let profileMenu = document.querySelector(".profile-menu-wrap");
             profileMenu.classList.toggle("open-menu");
         }
-        return <OriginalComponent toggleMenu={toggleMenu} />
+        return <NavbarRight toggleMenu={toggleMenu} />
     }
-    return NewComponent;
 }
 
-export default UpdatedComponent;
+export default WithNavbarRight

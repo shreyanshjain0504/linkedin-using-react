@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function IconNavLink({ to, className='', imgLink, text}) {
   return (
     <>
-        <li>
+        <li key={to}>
           <Link to={to} className={className}>
           <img src={imgLink} />
           <span>{text}</span>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import video from '../../assets/video.png'
+import photo from '../../assets/photo.png'
 import event from '../../assets/event.png'
-import { USER_IMAGE } from '../Constants/Constants';
+import { USER_IMAGE } from '../constants/constants';
 import formatDate from '../helpers/formatDate'
 import formattedDate from '../helpers/formattedDate'
+import TextArea from '../atoms/TextArea';
 
 export default function CreatePost({ postArray, setPostArray }) {
 
@@ -17,24 +19,23 @@ export default function CreatePost({ postArray, setPostArray }) {
     useEffect(() => {
         saveData();
         loadData();
-    }, [postArray]);
+    }, []);
 
     const saveData = () => {
         localStorage.setItem('data', JSON.stringify(postArray));
     };
 
     const loadData = () => {
-        const savedPosts = localStorage.getItem("posts");
+        const savedPosts = localStorage.getItem('data');
         if (savedPosts) {
             setPostArray(JSON.parse(savedPosts));
         }
+        return postArray
     };
 
     function createPost() {
         if (text == '') {
             alert("Enter some text!");
-            document.querySelector('input[type=file]').value = '';
-            setFile(null);
             return;
         }
         if (file == undefined) {
@@ -59,37 +60,33 @@ export default function CreatePost({ postArray, setPostArray }) {
             comments: 0
         };
 
-        setPostArray(postArray => {
-            const updatedArray = [...postArray, newPost];
-            localStorage.setItem('data', JSON.stringify(updatedArray)); // Save immediately
-            return updatedArray;
-        });
-
+        const updatedArray = [...postArray, newPost];
+        setPostArray(updatedArray);
         saveData();
-        loadData();
         alert('Post created!');
         setText('')
-        document.querySelector('input[type=file]').value = '';
         setFile(null);
     }
-  return (
-    <>
-        <div className="create-post">
-            <div className="create-post-input">
-                <img src={USER_IMAGE} />
-                <textarea rows="2" value={text} onChange={(e) => setText(e.target.value)} placeholder="Write a post"></textarea>
+    return (
+        <>
+            <div className="create-post">
+                <TextArea text={text} setText={setText} />
+                <div className="create-post-links">
+                    <li>
+                        <label for="file-upload" class="custom-file-upload">
+                            <img src={photo} />
+                            Photo
+                        </label>
+                        <input id="file-upload" type="file" onChange={handleChange} style={{
+                            width: "10vw"
+                        }}/>
+                    </li>
+
+                    <li><img src={video} />Video</li>
+                    <li><img src={event} />Event</li>
+                    <li className="submit-class" onClick={createPost}>Post</li>
+                </div>
             </div>
-            <div className="create-post-links">
-                <li>
-                    <input type="file" onChange={handleChange} style={{
-                        width: "10vw"
-                    }} />
-                </li>
-                <li><img src={video} />Video</li>
-                <li><img src={event} />Event</li>
-                <li className="submit-class" onClick={createPost}>Post</li>
-            </div>
-        </div>
-    </>
-  )
+        </>
+    )
 }

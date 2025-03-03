@@ -159,6 +159,6 @@ export let education = [
     {position: "Computer Science and Engineering", company: "NIT Raipur", from: "Dec 2021", to: "June 2025", desc: "Engineering", time: 1739877238522, type: "education"}
 ]
 
-export let filterArray = [
+export let filteredArray = [
     
 ]

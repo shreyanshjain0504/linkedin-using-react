@@ -12,7 +12,8 @@ const Post = ({ post }) => {
         </div>
       </div>
       <p>{post.content}</p>
-      <img src={ post.image } width="100%" alt="Post" />
+      { post?.image && 
+      <img src={ post.image } width="100%" alt="Post" height="450px"/> }
       <div className="post-stats">
         <div>
           <span className="liked-user">{post.reactions} reactions</span>
@@ -26,18 +27,14 @@ const Post = ({ post }) => {
 };
 
 const PostsContainer = ({ posts }) => {
-  useEffect(() => {
-    localStorage.removeItem('filter')
-  }, [posts]);
-
   if (localStorage.getItem('filter') && JSON.parse(localStorage.getItem('filter')) != []) {
     posts = JSON.parse(localStorage.getItem('filter'));
     console.log(posts)
     localStorage.removeItem('filter')
-  }
-
-  console.log("this is posts - ", posts)
-
+  }  
+  useEffect(() => {
+    localStorage.removeItem('filter')
+  }, []);
   return (
     <div className="posts">
       {posts.map((post, index) => (

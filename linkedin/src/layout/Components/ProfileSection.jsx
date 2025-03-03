@@ -1,5 +1,5 @@
 import React from 'react'
-import { COVER_PIC, LOCATION, NAME, ROLE, USER_IMAGE } from '../Constants/Constants'
+import { COVER_PIC, LOCATION, NAME, ROLE, USER_IMAGE } from '../constants/constants'
 import { Link } from 'react-router-dom'
 import chat from '../../assets/chat.png'
 

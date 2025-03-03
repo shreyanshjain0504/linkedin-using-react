@@ -1,7 +1,7 @@
 import React from 'react'
 import ProfileMenuWrap from '../Components/ProfileMenuWrap';
-import UpdatedComponent from '../HOCs/NavbarRightHOC';
-import { NAME, USER_IMAGE } from '../Constants/Constants';
+import WithNavbarRight from '../hoc/withNavbarRight.jsx';
+import { NAME, USER_IMAGE } from '../constants/constants';
 
 function NavbarRight({ toggleMenu }) {
   return (
@@ -14,4 +14,4 @@ function NavbarRight({ toggleMenu }) {
   )
 }
 
-export default UpdatedComponent(NavbarRight)
+export default WithNavbarRight(NavbarRight)

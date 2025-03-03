@@ -1,5 +1,5 @@
 import React from 'react'
-import { recents, groups, sideProfileLink, profileDetails } from '../utils/displayLists.jsx';
+import { recents, groups, sideProfileLink, profileDetails } from '../utils/displayLists.js';
 import InfoCard from './InfoCard.jsx'
 import SidebarProfileBox from './SidebarProfileBox.jsx'
 import user1 from '../../assets/user-1.png'

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { posts, searchList, filterArray } from '../utils/displayLists.jsx';
+import { posts, searchList, filteredArray } from '../utils/displayLists.js';
 
-export function UpdatedComponent(OriginalComponent) {
-    function NewComponent() {
+export function WithNavbarLeft(NavbarLeft) {
+    return function NewComponent() {
         const [inputText, setInputText] = useState('');
         const [filterArray, setFilterArray] = useState(localStorage.getItem('filter') ? JSON.parse(localStorage.getItem('filter')) : [])
 
@@ -51,9 +51,8 @@ export function UpdatedComponent(OriginalComponent) {
                 </ul>
             )
         }
-        return <OriginalComponent List={List} inputText={inputText} toggle={toggle} setInputText={setInputText} />
+        return <NavbarLeft List={List} inputText={inputText} toggle={toggle} setInputText={setInputText} />
     }
-    return NewComponent;
 }
 
-export default UpdatedComponent;
+export default WithNavbarLeft;

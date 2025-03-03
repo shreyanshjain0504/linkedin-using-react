@@ -4,9 +4,21 @@ import RefreshBanner from '../utils/RefreshBanner.jsx'
 import CreatePost from '../Components/CreatePost.jsx'
 import PostsList from '../templates/PostsList.jsx'
 import SortRangeBy from '../Components/SortRangeBy.jsx'
-import UpdatedComponent from '../HOCs/MainContainerHOC.jsx'
+import { posts } from '../utils/displayLists.js'
 
-function MainContainer({ postArray, setPostArray }) {
+function MainContainer() {
+    const [postArray, setPostArray] = useState(localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : posts);
+    useEffect(() => {
+        const savedPosts = localStorage.getItem('data');
+        if (savedPosts) {
+            setPostArray(JSON.parse(savedPosts));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify(postArray));
+        // setPostArray(JSON.parse(localStorage.getItem('data')))
+    }, [postArray]);
     return (
         <>
             <RefreshBanner />
@@ -26,4 +38,4 @@ function MainContainer({ postArray, setPostArray }) {
     )
 }
 
-export default UpdatedComponent(MainContainer)
+export default MainContainer

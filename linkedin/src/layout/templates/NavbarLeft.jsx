@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import IconLink from '../molecules/IconLink.jsx';
-import UpdatedComponent from '../HOCs/NavbarLeftHOC.jsx';
+import withNavbarLeft from '../hoc/withNavbarLeft.jsx';
 import SearchBar from '../Components/SearchBar.jsx';
-import { LOGO } from '../Constants/Constants.jsx';
+import { LOGO } from '../constants/constants.js';
 
 function NavbarLeft({ List, inputText, toggle, setInputText }) {
     return (
@@ -15,4 +15,4 @@ function NavbarLeft({ List, inputText, toggle, setInputText }) {
     )
 }
 
-export default UpdatedComponent(NavbarLeft)
+export default withNavbarLeft(NavbarLeft)

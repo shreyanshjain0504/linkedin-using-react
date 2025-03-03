@@ -2,7 +2,7 @@ import React from 'react'
 import SidebarNews from './SidebarNews.jsx'
 import SidebarAd from './SidebarAd.jsx'
 import SidebarUsefulLinks from './SidebarUsefulLinks.jsx'
-import { sideBarNews, usefulLinks } from '../utils/displayLists.jsx'
+import { sideBarNews, usefulLinks } from '../utils/displayLists.js'
 import user1 from '../../assets/user-1.png'
 import logo from '../../assets/logo.png'
 

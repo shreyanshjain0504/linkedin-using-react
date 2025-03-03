@@ -132,7 +132,8 @@ h3 {
 }
 
 .navbar-center > ul > li {
-  margin-right: 3.33vw;
+  margin-right: 3vw;
+  /* margin-left: 30px; */
   display: flex;
   flex-direction: column;
 }
@@ -253,7 +254,6 @@ h3 {
   position: fixed;
   padding-left: 2vw;
   padding-right: 1vw;
-  /* padding-top: 13vh; */
   width: 21vw;
   top: 80px;
   margin-left: 8px;
@@ -272,9 +272,10 @@ h3 {
 }
 
 .myImage {
+  border: 2px solid white;
   border-radius: 50%;
-  height: 9vw;
-  width: 9vw;
+  height: 90px;
+  width: 90px;
   margin-left: 1vw;
   margin-top: -5vh;
 }
@@ -284,7 +285,10 @@ h3 {
 }
 
 .sidebar-profile-box > img {
-  padding-top: 3px;
+  padding-top: 1px;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .sidebar-profile-link > p {
@@ -293,8 +297,8 @@ h3 {
 
 .sidebar-profile-link > a > img {
   padding-left: 1.5vw;
-  height: 1.5vw;
-  width: 2vw;
+  height: 15px;
+  width: 15px;
 }
 
 .sidebar-activity > a {
@@ -388,6 +392,17 @@ h3 {
   color: #fff;
   border-top: 0;
   border-right: 0;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  /* border: 1px solid #ccc; */
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
 .sort-by {
@@ -520,8 +535,14 @@ h3 {
   color: white;
   background-color: #807e7e;
   border: none;
-  padding: 2px;
+  padding: 3px;
+  border-radius: 3px;
   cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #1469f1;
+  transition: 0.3s ease;
 }
 
 /* main content stlying end */

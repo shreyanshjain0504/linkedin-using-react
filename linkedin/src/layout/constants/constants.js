@@ -13,3 +13,5 @@ export const COVER_PIC = coverPic
 export const LOGO = logo
 
 export const LOCATION = "Bengaluru, Karnataka, India"
+
+export const TEXT = "I am Shreyansh Jain, a Computer Science student at NIT Raipur from batch 2025. Currently working as Associate Software Engineer Intern at Tekion Corp working in the Accounting team as a FE Intern."

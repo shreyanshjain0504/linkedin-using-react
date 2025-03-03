@@ -1,7 +1,21 @@
 import { useState, useEffect } from "react";
-import UpdatedComponent from "../HOCs/RefreshHOC";
 
-const RefreshBanner = ({ showBanner, handleRefresh }) => {
+const RefreshBanner = () => {
+    const [showBanner, setShowBanner] = useState(false);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowBanner(true);
+        }, 30000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleRefresh = () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
+    };
     return (
         <>
             {showBanner && (
@@ -13,4 +27,4 @@ const RefreshBanner = ({ showBanner, handleRefresh }) => {
     );
 };
 
-export default UpdatedComponent(RefreshBanner);
+export default RefreshBanner
