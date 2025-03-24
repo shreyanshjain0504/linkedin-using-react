@@ -1,9 +1,7 @@
 import React from 'react'
-import { COVER_PIC, LOCATION, NAME, ROLE, USER_IMAGE } from '../constants/constants'
-import { Link } from 'react-router-dom'
-import chat from '../../assets/chat.png'
+import { COVER_PIC, LOCATION, NAME, ROLE, USER_IMAGE, MUTUALS } from '../constants/constants'
 
-export default function ProfileSection({ mutuals }) {
+export default function ProfileSection() {
     return (
         <>
             <div className="profile-container">
@@ -15,10 +13,7 @@ export default function ProfileSection({ mutuals }) {
                     <p>{LOCATION}</p>
                     <div className="mutual-connection">
                         <img src={USER_IMAGE} alt="" />
-                        <span>{mutuals} mutual connections: Divyansh Pandey</span>
-                    </div>
-                    <div className="profile-btn">
-                        <Link to="#"><img src={chat} />Chat</Link>
+                        <span>{MUTUALS} mutual connections: Divyansh Pandey</span>
                     </div>
                 </div>
             </div>

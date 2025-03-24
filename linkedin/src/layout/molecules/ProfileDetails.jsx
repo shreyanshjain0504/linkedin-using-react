@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function ProfileDetails({ colOneDetails, colTwoDetails }) {
+export default function ProfileDetails({ profileActivity, profileMetrics }) {
   return (
     <>
         <li>
-          <span>{ colOneDetails }</span>
-          <span className="col-two">{ colTwoDetails }</span>
+          <span>{ profileActivity }</span>
+          <span className="col-two">{ profileMetrics }</span>
         </li>
     </>
   )

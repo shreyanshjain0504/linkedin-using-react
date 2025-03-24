@@ -1,37 +1,44 @@
-import React from 'react'
-import mit from '../../assets/mit.png'
+import React from 'react';
+import mit from '../../assets/mit.png';
+import Button from '../atoms/Button';
 
-const Education = ({ ed }) => {
+const Education = ({ ed, onRemove }) => {
+  const handleClick = () => {
+    onRemove(ed.time, 'education');  
+  };
+
   return (
     <>
-        <div className="profile-desc-row" id={ed.time}>
-            <img src={mit} height="120px" alt={ed.company} />
-            <div>
-                <h3>{ed.company}</h3>
-                <b>{ed.position}</b>
-                <b>{ed.from} - {ed.to}</b>
-                <p>{ed.desc}</p>
-                <hr />
-            </div>
-            <button className="remove-btn" dataId={ed.time}  onClick={() => {
-                let edArray = JSON.parse(localStorage.getItem('education'))
-                let updatedArray = edArray.filter(item => item.time != ed.time)
-                localStorage.setItem('education', JSON.stringify(updatedArray))
-            }}>Remove</button>
+      <div className="profile-desc-row" id={ed.time}>
+        <img src={mit} alt={ed.company} />
+        <div>
+          <h3>{ed.company}</h3>
+          <b>{ed.position}</b>
+          <b>{ed.from} - {ed.to}</b>
+          <p>{ed.desc}</p>
+          <hr />
         </div>
+        <Button className="remove-btn" 
+                onClick={handleClick} 
+                textContent="Remove" 
+        />
+      </div>
     </>
-  )
-}
+  );
+};
 
-const EducationContainer = ({ education }) => {
+const EducationContainer = ({ educationArray, onRemove }) => {
     return (
-        <>
-            <div className="education">
-                {education.map(ed => <Education ed={ ed }/>)}
-            </div>
-        </>
-    )
-}
-
+      <div className="education-container">
+        {educationArray.length > 0 ? (
+          educationArray.map((ed) => (
+            <Education ed={ed} onRemove={onRemove} />
+          ))
+        ) : (
+          <p>No education added yet.</p>
+        )}
+      </div>
+    );
+};
 
 export { Education, EducationContainer };

@@ -1,18 +1,25 @@
-import React, { useState } from 'react'
-import Button from '../atoms/Button'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '../atoms/Button';
+import { setShowMore } from '../redux/Actions/actions'; // import the action
+import { TEXT } from '../constants/constants';
 
-function About() {
-  const text = "I am Shreyansh Jain, a Computer Science student at NIT Raipur from batch 2025. Currently working as Associate Software Engineer Intern at Tekion Corp working in the Accounting team as a FE Intern.";
-  const [showMore, setShowMore] = useState(false) 
+export default function About() {
+  const showMore = useSelector(state => state.showMore);
+  const dispatch = useDispatch();
+  function handleClick() {
+    dispatch(setShowMore(!showMore));
+  }
+
   return (
     <>
       <div className="profile-description">
         <h2>About</h2>
-        <p>{showMore ? text : `${text.substring(0, 100)}`}</p>
-        <Button onClick={() => setShowMore(!showMore)} value={!showMore ? "Show More..." : "Show Less"} />
+        <p>{showMore ? TEXT : `${TEXT.substring(0, 100)}`}</p>
+        <Button onClick={handleClick} 
+                textContent={!showMore ? "Show More..." : "Show Less"} 
+        />
       </div>
     </>
-  )
+  );
 }
-
-export default About

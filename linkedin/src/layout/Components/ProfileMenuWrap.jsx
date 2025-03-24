@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import user1 from '../../assets/user-1.png'
+import { NAME, ROLE } from '../constants/constants'
 
 export default function ProfileMenuWrap({ name }) {
   return (
@@ -10,7 +11,8 @@ export default function ProfileMenuWrap({ name }) {
                 <div className="user-info">
                     <img src={user1} alt="user-image" className="nav-profile-img" />
                     <div>
-                        <h3>{ name }</h3>
+                        <h3>{ NAME }</h3>
+                        <b>{ ROLE }</b>
                         <Link to="/profile">See your profile</Link>
                     </div>
                 </div>

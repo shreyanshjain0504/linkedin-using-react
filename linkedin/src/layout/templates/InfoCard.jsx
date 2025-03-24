@@ -8,7 +8,6 @@ export default function InfoCard({ heading, list }) {
       {list.map(item =>
         <IconLink key={item.imgLink} imgLink={item.imgLink} text={item.text} />
       )}
-      <hr />
     </>
   )
 }

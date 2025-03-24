@@ -1,41 +1,39 @@
-import React, { useState, useEffect } from 'react'
-import { PostsContainer } from '../Components/Post'
-import RefreshBanner from '../utils/RefreshBanner.jsx'
-import CreatePost from '../Components/CreatePost.jsx'
-import PostsList from '../templates/PostsList.jsx'
-import SortRangeBy from '../Components/SortRangeBy.jsx'
-import { posts } from '../utils/displayLists.js'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setStartDate, setEndDate } from '../redux/Actions/actions'; 
+import CreatePost from '../Components/CreatePost.jsx';
+import PostsContainer from '../templates/PostsContainer.jsx';
+import SortRangeBy from '../Components/SortRangeBy.jsx';
 
 function MainContainer() {
-    const [postArray, setPostArray] = useState(localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : posts);
-    useEffect(() => {
-        const savedPosts = localStorage.getItem('data');
-        if (savedPosts) {
-            setPostArray(JSON.parse(savedPosts));
-        }
-    }, []);
+  const { startDate, endDate } = useSelector(state => state);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(postArray));
-        // setPostArray(JSON.parse(localStorage.getItem('data')))
-    }, [postArray]);
-    return (
-        <>
-            <RefreshBanner />
-            <div className="main-content">
+  const handleStartDateChange = (date) => {
+    dispatch(setStartDate(date));
+  }
 
-                <CreatePost postArray={postArray} setPostArray={setPostArray} />
+  const handleEndDateChange = (date) => {
+    dispatch(setEndDate(date));
+  }
 
-                <SortRangeBy postArray={postArray} setPostArray={setPostArray} />
+  return (
+    <>
+      <div className="main-content">
+        <CreatePost />
 
-                {/* Post creation and addition functionality */}
-                <PostsContainer posts={postArray} setPostArray={setPostArray} />
+        <SortRangeBy 
+          startDate={startDate}
+          setStartDate={handleStartDateChange}
+          endDate={endDate}
+          setEndDate={handleEndDateChange}  
+        />
 
-                {/* Infinite scroll  */}
-                {/* <PostsList /> */}
-            </div>
-        </>
-    )
+        {/* Infinite scroll  */}
+        <PostsContainer />
+      </div>
+    </>
+  );
 }
 
-export default MainContainer
+export default MainContainer;

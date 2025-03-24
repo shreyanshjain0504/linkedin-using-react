@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import IconLink from '../molecules/IconLink.jsx';
-import withNavbarLeft from '../hoc/withNavbarLeft.jsx';
+import withNavbarLeft from '../hoc/withNavbarLeft.jsx'
 import SearchBar from '../Components/SearchBar.jsx';
 import { LOGO } from '../constants/constants.js';
 

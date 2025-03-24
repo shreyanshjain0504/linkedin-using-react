@@ -1,37 +1,44 @@
-import React from 'react'
-import logo from '../../assets/logo.png'
+import React from 'react';
+import logo from '../../assets/logo.png';
+import Button from '../atoms/Button';
 
-const Experience = ({ exp }) => {
+const Experience = ({ exp, onRemove }) => {
+  const handleClick = () => {
+    onRemove(exp.time, 'experience');  
+  };
+
   return (
     <>
-        <div className="profile-desc-row" id={exp.time}>
-            <img src={logo} height="120px" alt={exp.company} />
-            <div>
-                <h3>{exp.company}</h3>
-                <b>{exp.position}</b>
-                <b>{exp.from} - {exp.to}</b>
-                <p>{exp.desc}</p>
-                <hr />
-            </div>
-            <button className="remove-btn" dataId={exp.time}  onClick={() => {
-                let expArray = JSON.parse(localStorage.getItem('experience'))
-                let updatedArray = expArray.filter(item => item.time != exp.time)
-                localStorage.setItem('experience', JSON.stringify(updatedArray))
-            }}>Remove</button>
+      <div className="profile-desc-row" id={exp.time}>
+        <img src={logo} alt={exp.company} />
+        <div>
+          <h3>{exp.company}</h3>
+          <b>{exp.position}</b>
+          <b>{exp.from} - {exp.to}</b>
+          <p>{exp.desc}</p>
+          <hr />
         </div>
+        <Button className="remove-btn" 
+                onClick={handleClick} 
+                textContent="Remove"
+        />
+      </div>
     </>
-  )
-}
+  );
+};
 
-const ExperienceContainer = ({ experience }) => {
+const ExperienceContainer = ({ experienceArray, onRemove }) => {
     return (
-        <>
-            <div className="experience">
-                {experience.map(exp => <Experience exp={ exp }/>)}
-            </div>
-        </>
-    )
-}
-
+      <div className="experience-container">
+        {experienceArray.length > 0 ? (
+          experienceArray.map((exp) => (
+            <Experience exp={exp} onRemove={onRemove} />
+          ))
+        ) : (
+          <p>No experience added yet.</p>
+        )}
+      </div>
+    );
+  };
 
 export { Experience, ExperienceContainer };

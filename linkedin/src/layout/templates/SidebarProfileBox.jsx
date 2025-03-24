@@ -2,31 +2,27 @@ import React from 'react'
 import IconLink from '../molecules/IconLink'
 import ProfileDetails from '../molecules/ProfileDetails'
 import { Link } from 'react-router-dom'
+import { COVER_PIC, NAME, ROLE, USER_IMAGE } from '../constants/constants'
 
-export default function SidebarProfileBox({ user1, coverPic, name, role, profileDetails, sideProfileLink }) {
+export default function SidebarProfileBox({ profileDetails, sideProfileLink }) {
     return (
         <div>
             <div class="sidebar-profile-box">
-                <img src={ coverPic } width="100%" />
+                <img src={ COVER_PIC } width="100%" />
                 <div class="sidebar-profile-info">
                     <Link to="/profile">
-                        <img src={ user1 } className="myImage" />
+                        <img src={ USER_IMAGE } className="myImage" />
                     </Link>
-                    <h3>{ name }</h3>
-                    <span>{ role }</span>
+                    <h3>{ NAME }</h3>
+                    <span>{ ROLE }</span>
                     <ul>
-                        {profileDetails.map(item =>
-                            <ProfileDetails colOneDetails={item.colOneDetails} colTwoDetails={item.colTwoDetails} />
-                        )}
+                        {profileDetails.map(item => <ProfileDetails {...item} />)}
                     </ul>
                 </div>
                 <div class="sidebar-profile-link">
-                    {sideProfileLink.map(item =>
-                        <IconLink imgLink={item.imgLink} text={item.text} />
-                    )}
+                    {sideProfileLink.map(item => <IconLink {...item} />)}
                 </div>
             </div>
-            <hr />
         </div>
     )
 }

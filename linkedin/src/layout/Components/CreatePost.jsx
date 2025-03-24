@@ -4,86 +4,76 @@ import photo from '../../assets/photo.png'
 import event from '../../assets/event.png'
 import { USER_IMAGE } from '../constants/constants';
 import formatDate from '../helpers/formatDate'
-import formattedDate from '../helpers/formattedDate'
+import formatDateForSort from '../helpers/formatDateForSort'
 import TextArea from '../atoms/TextArea';
+import saveData from '../helpers/saveData';
 
-export default function CreatePost({ postArray, setPostArray }) {
-
+export default function CreatePost() {
+    const key = 'data'
+    const [postArray, setPostArray] = useState(localStorage.getItem('data') 
+                                    ? JSON.parse(localStorage.getItem('data')) 
+                                    : [])
     const [file, setFile] = useState('')
     const [text, setText] = useState('')
 
-    function handleChange(e) {
+    const handleChange = (e) => {
         setFile(URL.createObjectURL(e?.target?.files[0]));
     }
 
     useEffect(() => {
         saveData();
-        loadData();
-    }, []);
+    }, [postArray]);
 
-    const saveData = () => {
-        localStorage.setItem('data', JSON.stringify(postArray));
-    };
-
-    const loadData = () => {
-        const savedPosts = localStorage.getItem('data');
-        if (savedPosts) {
-            setPostArray(JSON.parse(savedPosts));
-        }
-        return postArray
-    };
-
-    function createPost() {
-        if (text == '') {
+    const createPost = () => {
+        if (text === '') {
             alert("Enter some text!");
             return;
         }
-        if (file == undefined) {
-            alert('Select any image to upload!');
-            return;
-        }
 
-        const today = new Date();
-        const formatToday = formatDate(today);
-        const formattedToday = formattedDate(today);
+        const date = new Date();
+        const time = formatDate(date);
+        const postTime = formatDateForSort(date);
         let newPost = {
-            postTime: formatToday,
             iconImage: USER_IMAGE,
             image: file,
-            time: formattedToday,
-            content: text,
-            author: {
-                name: "Shreyansh Jain",
-                designation: "ASE Intern Tekion"
-            },
-            reactions: 0,
-            comments: 0
-        };
-
+            body: text,
+            id: 7,
+            title: "magnam facilis autem",
+            userId: 1,
+            name: "Shreyansh Jain",
+            designation: "ASE Intern",
+            time: time,
+            postTime: postTime
+        }
         const updatedArray = [...postArray, newPost];
         setPostArray(updatedArray);
-        saveData();
+        const value = JSON.stringify(updatedArray)
+        saveData(key, value);
         alert('Post created!');
         setText('')
         setFile(null);
     }
+    
     return (
         <>
             <div className="create-post">
                 <TextArea text={text} setText={setText} />
                 <div className="create-post-links">
                     <li>
-                        <label for="file-upload" class="custom-file-upload">
-                            <img src={photo} />
+                        <img src={photo} alt="camera" />
+                        <label for="file-upload" 
+                                class="custom-file-upload"
+                        >
                             Photo
                         </label>
-                        <input id="file-upload" type="file" onChange={handleChange} style={{
-                            width: "10vw"
-                        }}/>
+                        <input id="file-upload" 
+                                type="file" 
+                                onChange={handleChange} 
+                        />
                     </li>
 
-                    <li><img src={video} />Video</li>
-                    <li><img src={event} />Event</li>
+                    <li><img src={video} alt="video" />Video</li>
+                    <li><img src={event} alt="event" />Event</li>
                     <li className="submit-class" onClick={createPost}>Post</li>
                 </div>
             </div>

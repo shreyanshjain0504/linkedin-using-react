@@ -1,5 +1,6 @@
 import React from 'react'
 import { USER_IMAGE } from '../constants/constants'
+import PropTypes from 'prop-types';
 
 export default function TextArea({ text, setText }) {
   return (
@@ -10,4 +11,9 @@ export default function TextArea({ text, setText }) {
         </div>
     </>
   )
+}
+
+TextArea.propTypes = {
+  text: PropTypes.string,
+  setText: PropTypes.string
 }

@@ -6,7 +6,7 @@ export default function SidebarUsefulLinks({ imgLink, usefulLinks }) {
     <>
       <div className="sidebar-useful-links">
         {usefulLinks.map(item =>
-          <Link to={item.link}>{item.text}</Link>
+          <Link to={item.link} key={item.text}>{item.text}</Link>
         )}
         <div className="copyright-msg">
           <img src={ imgLink } />

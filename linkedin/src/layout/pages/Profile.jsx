@@ -1,210 +1,91 @@
-import React, { useState, useEffect, createRef } from 'react'
-import Navbar from '../Components/Navbar.jsx'
-import { experience, education } from '../utils/displayLists.js'
-import { ExperienceContainer } from '../Components/Experience.jsx'
-import { EducationContainer } from '../Components/Education.jsx'
-import Input from '../atoms/Input.jsx'
-import Label from '../atoms/Label.jsx'
-import About from '../Components/About.jsx'
-import Button from '../atoms/Button.jsx'
-import ProfileSection from '../Components/ProfileSection.jsx'
-import SkillSection from '../Components/SkillSection.jsx'
+import React, { useState } from 'react';
+import Navbar from '../Components/Navbar.jsx';
+import ProfileSectionItem from '../templates/ProfileSectionItem.jsx';
+import ProfileSection from '../Components/ProfileSection.jsx';
+import SkillSection from '../Components/SkillSection.jsx';
+import Form from '../templates/Form.jsx';
+import saveData from '../helpers/saveData.js';
+import About from '../Components/About.jsx';
 
-class Form extends React.PureComponent {
-    constructor(props) {
-        super(props)
-        this.state = {
-            experienceArray: (localStorage.getItem('experience') ? JSON.parse(localStorage.getItem('experience')) : experience), 
-            educationArray: (localStorage.getItem('education') ? JSON.parse(localStorage.getItem('education')) : education),
-            formData: {
-                position: "",
-                company: "",
-                from: "",
-                to: "",
-                desc: "",
-            }
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+const Profile = () => {
+  const [formType, setFormType] = useState('');
+  const [toggle, setToggle] = useState(false);
+
+  const [experienceArray, setExperienceArray] = useState(
+    JSON.parse(localStorage.getItem('experience')) || []
+  );
+  const [educationArray, setEducationArray] = useState(
+    JSON.parse(localStorage.getItem('education')) || []
+  );
+
+  const updateExperience = (newExperienceArray) => {
+    setExperienceArray(newExperienceArray);
+  };
+
+  const updateEducation = (newEducationArray) => {
+    setEducationArray(newEducationArray);
+  };
+
+  const handleClick = (e) => {
+    setFormType(e.target.value);
+    setToggle(true);
+  };
+
+  const onRemove = (id, type) => {
+    if (type === 'experience') {
+      const updatedExperienceArray = experienceArray.filter((exp) => exp.time !== id);
+      setExperienceArray(updatedExperienceArray);
+      saveData(type, JSON.stringify(updatedExperienceArray));
+    } else if (type === 'education') {
+      const updatedEducationArray = educationArray.filter((ed) => ed.time !== id);
+      setEducationArray(updatedEducationArray);
+      saveData(type, JSON.stringify(updatedEducationArray));
     }
+  };
 
-    handleChange = (e) => {
-        const { name, value } = e?.target;
-        this.setState(prevState => ({
-            formData: {
-                ...prevState.formData,
-                [name]: value
-            }
-        }));
-    };
+  return (
+    <>
+      <Navbar />
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        if (this.props.formType === "education") {
-            this.createEducation();
-        } else {
-            this.createExperience();
-        }
-    };
+      {toggle && (
+        <Form
+          formType={formType}
+          toggle={toggle}
+          setToggle={setToggle}
+          updateExperience={updateExperience}
+          updateEducation={updateEducation}
+        />
+      )}
 
-    componentDidUpdate() {
-        this.loadDataEducation()
-        this.loadDataExperience()
-    }
-    
-    saveData() {
-        localStorage.setItem('experience', JSON.stringify(this.state.experienceArray));
-        localStorage.setItem('education', JSON.stringify(this.state.educationArray));
-    };
-    
-    loadDataExperience = () => {
-        const savedExperience = localStorage.getItem("experience");
-        return savedExperience ? JSON.parse(savedExperience) : [];
-    };
-    
-    loadDataEducation = () => {
-        const savedEducation = localStorage.getItem("education");
-        return savedEducation ? JSON.parse(savedEducation) : [];
-    };
-    
-    createExperience = () => {
-        const newExperience = {
-            ...this.state.formData,
-            type: this.state.formType,
-            time: new Date().getTime(),
-        };
-        
-        this.setState(prevState => ({
-            experienceArray: [newExperience, ...prevState.experienceArray],
-            formData: { position: '', company: '', from: '', to: '', desc: '' }
-        }), () => {
-            this.saveData()
-        })
-    };
-    
-    createEducation = () => {
-        const newEducation = {
-            ...this.state.formData,
-            type: this.state.formType,
-            time: new Date().getTime(),
-        };
-    
-        this.setState(prevState => ({
-            educationArray: [newEducation, ...prevState.educationArray],
-            formData: { position: '', company: '', from: '', to: '', desc: '' }
-        }), () => {
-            this.saveData()
-        })
-    };
+      <div className="container">
+        <div className="profile-main">
+          <ProfileSection />
 
-    removeExperience = (index) => {
-        this.setState(prevState => {
-            const experienceArray = [...prevState.experienceArray];
-            experienceArray.splice(index, 1);
-            return { experienceArray };
-        }, this.saveData);
-    }
+          <About />
+          
+          <ProfileSectionItem
+            title="Experience"
+            buttonText="Add Experience"
+            formType="experience"
+            arrayData={experienceArray}
+            onRemove={onRemove}
+            onAddClick={handleClick}
+          />
 
-    removeEducation = (index) => {
-        this.setState(prevState => {
-            const educationArray = [...prevState.educationArray];
-            educationArray.splice(index, 1);
-            return { educationArray };
-        }, this.saveData);
-    }
+          <ProfileSectionItem
+            title="Education"
+            buttonText="Add Education"
+            formType="education"
+            arrayData={educationArray}
+            onRemove={onRemove}
+            onAddClick={handleClick}
+          />
 
-    getExperienceArray = () => {
-        return this.state.experienceArray;
-    };
+          <SkillSection />
+        </div>
+      </div>
+    </>
+  );
+};
 
-    getEducationArray = () => {
-        return this.state.educationArray;
-    };
-
-    render() {
-        return (
-            <div id="popupOverlay" className="overlay-container">
-                <div className="popup-box">
-                    <form className="form-container" onSubmit={this.handleSubmit}>
-                        <Label htmlFor="position" value={this.props.formType === "education" ? "Branch" : "Position"} />
-                        <Input placeholder={this.props.formType === "education" ? "Enter your Branch" : "Enter your Position"} id="position" name="position" value={this.state.formData.position} onChange={this.handleChange}/>
-
-                        <Label htmlFor="company" value={this.props.formType === "education" ? "College" : "Company"} />
-                        <Input placeholder={this.props.formType === "education" ? "Enter your College" : "Enter your Company"} id="company" name="company" value={this.state.formData.company} onChange={this.handleChange}/>
-
-                        <Label htmlFor="from" value="From" />
-                        <Input placeholder="From" id="from" name="from" value={this.state.formData.from} onChange={this.handleChange}/>
-
-                        <Label htmlFor="to" value="To" />
-                        <Input placeholder="To" id="to" name="to" value={this.state.formData.to} onChange={this.handleChange}/>
-
-                        <Label htmlFor="desc" value="Description" />
-                        <Input placeholder="Description" id="desc" name="desc" value={this.state.formData.desc} onChange={this.handleChange}/>
-                        
-                        <div className="btn-collection">
-                            <Button className="btn-submit" value={this.props.formType == "education" ? "Add Education" : "Add Experience"} onClick={(e) => {
-                                this.handleSubmit(e)
-                            }} />
-                        </div>
-                    </form>
-
-                    <Button className="btn-close-popup" onClick={() => {
-                        this.props.setToggle(false)
-                    }} value="Close" />
-                </div>
-            </div>
-        )
-    }
-}
-
-export default function App() {
-    const [formType, setFormType] = useState('')
-    const [toggle, setToggle] = useState(false)
-
-    useEffect(() => {}, [formType, toggle])
-
-    const profileInstance = new Form();
-    const experienceArray = profileInstance.getExperienceArray();
-    const educationArray = profileInstance.getEducationArray();
-
-    function handleChange(e) {
-        setFormType(e.target.value)
-        setToggle(true)
-    }
-
-    return (
-        <>
-            <Navbar />
-    
-            { toggle && 
-                <Form formType={formType} toggle={toggle} setToggle={setToggle} />
-            }
-
-            <div className="container">
-                <div className="profile-main">
-                    <ProfileSection mutuals={1} />
-
-                    <About />
-
-                    <div className="profile-description">
-                        <h2>Experience</h2>
-                        <button className="add-btn btn-open-popup" value='experience' onClick={e=>{
-                            handleChange(e)
-                        }}>Add Experience</button>
-                        <ExperienceContainer experience={experienceArray} />
-                    </div>
-
-                    <div className="profile-description">
-                        <h2>Education</h2>
-                        <button className="add-btn btn-open-popup" onClick={e=>{
-                            handleChange(e)
-                        }} value='education' >Add Education</button>
-                        <EducationContainer education={educationArray} />
-                    </div>
-
-                    <SkillSection />
-                </div>
-            </div>
-        </>
-    )
-}
+export default Profile;

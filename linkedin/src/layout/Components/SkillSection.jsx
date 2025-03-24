@@ -1,59 +1,61 @@
-import React, { useState, useEffect } from 'react'
-import { SkillContainer } from './Skills'
-import Input from '../atoms/Input'
-import useSetValue from '../atoms/UseSetValues';
+import React, { useState, useEffect } from 'react';
+import { SkillContainer } from './Skills';
+import Input from '../atoms/Input';
 import Button from '../atoms/Button';
 import { skills } from '../utils/displayLists';
+import saveData from '../helpers/saveData';
 
 function SkillSection() {
-    const [skillsArray, setSkillsArray] = useState(localStorage.getItem('skill') ? JSON.parse(localStorage.getItem('skill')) : skills);
-    const skillObj = useSetValue('')
+    const [skillsArray, setSkillsArray] = useState(localStorage.getItem('skills') 
+                            ? JSON.parse(localStorage.getItem('skills')) 
+                            : skills);
+    const [skill, setSkill] = useState(''); 
 
     const createSkill = () => {
-        if (!skillObj.value.trim()) {
+        if (!skill.trim()) {
             alert("Enter a skill first!");
             return;
         }
         
-        const newSkillObj = { name: skillObj.value };
-        const updatedSkills = [...skillsArray, newSkillObj];
+        const newSkillObj = { name: skill };
+        const updatedSkillsArray = [...skillsArray, newSkillObj];
         
-        setSkillsArray(updatedSkills); // Update state
-        saveData();
-        skillObj.onChange("");
-        loadDataSkills();
-    };
-    
-    const saveData = () => {
-        localStorage.setItem('skill', JSON.stringify(skillsArray));
-    };
-    
-    const loadDataSkills = () => {
-        const savedSkills = localStorage.getItem("skill");
-        return savedSkills ? JSON.parse(savedSkills) : [];
+        setSkillsArray(updatedSkillsArray); 
+        const key = 'skills'
+        const value = JSON.stringify(updatedSkillsArray)
+        saveData(key, value);
+        setSkill('');  
     };
 
+    const handleChange = (e) => {
+        setSkill(e.target.value)
+    }
+
     useEffect(() => {   
-        saveData()
-        loadDataSkills()
-    }, [skillsArray])
+        saveData();
+    }, [skillsArray]);
+
     return (
         <>
             <div className="profile-description">
                 <h2>Skills</h2>
-                <div style={{ float: "right", marginTop: "-30px" }}>
+                <div className="skills-input">
                     <Input
                         type="text"
                         className="input-for-skills"
-                        {...skillObj}
+                        value={skill}  
+                        onChange={handleChange}  
                     />
-                    <Button className="add-skills" onClick={createSkill} value='+' />
+                    <Button className="add-skills" 
+                        onClick={createSkill} 
+                        textContent='+' 
+                    />
                 </div>
 
                 <SkillContainer skills={skillsArray} />
             </div>
         </>
-    )
+    );
 }
 
-export default SkillSection
+export default SkillSection;
