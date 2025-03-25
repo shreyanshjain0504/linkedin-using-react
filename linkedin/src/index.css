@@ -107,14 +107,10 @@ h3 {
   right: 1vw;
   width: 250px;
   left: 2vw;
-  max-height: 0;
+  max-height: 400px;
   overflow: hidden;
   transition: max-height 0.5s;
   border-radius: 30px solid grey;
-}
-
-.profile-menu-wrapper.open-menu-search {
-  max-height: 400px;
 }
 
 .profile-search-menu {
@@ -224,13 +220,9 @@ h3 {
   top: 100%;
   right: 15vw;
   width: 250px;
-  max-height: 0;
+  max-height: 400;
   overflow: hidden;
   transition: max-height 0.5s;
-}
-
-.profile-menu-wrap.open-menu {
-  max-height: 400px;
 }
 
 .profile-menu {
