@@ -8,11 +8,9 @@ export default function SidebarLeft() {
         <>
             <div className="left-sidebar">
                 <SidebarProfileBox profileDetails={profileDetails} sideProfileLink={sideProfileLink} />
-                <div>
-                    <div className="sidebar-activity">
-                        <InfoCard heading="Recent" list={recents} />
-                        <InfoCard heading="Groups" list={groups} />
-                    </div>
+                <div className="sidebar-activity">
+                    <InfoCard heading="Recent" list={recents} />
+                    <InfoCard heading="Groups" list={groups} />
                 </div>
             </div>
         </>
