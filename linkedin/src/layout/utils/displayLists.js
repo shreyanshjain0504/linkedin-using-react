@@ -65,7 +65,7 @@ export const sideBarNews = [
     { link: "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/students-and-employment", text: "Less work visa for US, more on UK", readBy: "10h ago ... 8,675 readers" },
 ]
 
-export let usefulLinks = [
+export const usefulLinks = [
     { link: "https://tekion.com/about-us", text: "About" },
     { link: "https://tekion.com/blog", text: "Accessibility" },
     { link: "https://tekion.com/trust-portal", text: "Help Center" },
@@ -75,7 +75,7 @@ export let usefulLinks = [
     { link: "https://tekion.com/", text: "More" }
 ]
 
-export let searchList = [
+export const searchList = [
     { "id": 1, "text": "Shreyansh Jain" }, 
     { "id": 2, "text": "Krish Agrawal" }, 
     { "id": 3, "text": "Pankaj Kashyap" }, 
@@ -84,7 +84,7 @@ export let searchList = [
     { "id": 6, "text": "Aarif Khan" }, 
 ]
 
-export let skills = [
+export const skills = [
     { name: "HTML" },
     { name: "CSS" },
     { name: "JS" },

@@ -4,7 +4,7 @@ export function WithNavbarRight(NavbarRight) {
     return () => {
         function toggleMenu() {
             /* adds and removes the class name open-menu whenever called */
-            let profileMenu = document.querySelector(".profile-menu-wrap");
+            const profileMenu = document.querySelector(".profile-menu-wrap");
             profileMenu.classList.toggle("open-menu");
         }
         return <NavbarRight toggleMenu={toggleMenu} />

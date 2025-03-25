@@ -17,7 +17,7 @@ export default function withNavbarLeft(NavbarLeft) {
     }, [inputText, dispatch]);
 
     const toggle = () => {
-      let dropdownContent = document.querySelector('.profile-menu-wrapper');
+      const dropdownContent = document.querySelector('.profile-menu-wrapper');
       dropdownContent.classList.toggle('open-menu-search');
     }
 

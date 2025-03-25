@@ -24,7 +24,7 @@ export default function PostsContainer() {
     } else {
       setPosts((prevPosts) => [...prevPosts, ...newPosts]);
 
-      for (let post of newPosts) {
+      for (const post of newPosts) {
         delete post.userId;
         post.designation = roles[indexRef.current];
         post.name = names[indexRef.current];

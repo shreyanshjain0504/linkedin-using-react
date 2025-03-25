@@ -36,7 +36,7 @@ class Form extends PureComponent {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    for (let index in this.state.formData) {
+    for (const index in this.state.formData) {
       if (this.state.formData[index] === '') {
         return;
       }

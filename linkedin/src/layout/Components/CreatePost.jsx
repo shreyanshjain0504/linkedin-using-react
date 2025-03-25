@@ -33,7 +33,7 @@ export default function CreatePost() {
         const date = new Date();
         const time = formatDate(date);
         const postTime = formatDateForSort(date);
-        let newPost = {
+        const newPost = {
             iconImage: USER_IMAGE,
             image: file,
             body: text,
