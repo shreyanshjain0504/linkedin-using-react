@@ -242,7 +242,6 @@
 }
 
 .overlay-container {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -251,14 +250,15 @@
     background: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
-    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .popup-box {
     background: #fff;
     padding: 24px;
+    justify-self: center;
     border-radius: 12px;
+    margin-top: 10vh;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     width: 320px;
     text-align: center;
@@ -335,3 +335,19 @@
     }
 }
 
+@media (max-width: 767px) {
+    .profile-main {
+        width: 100vw;
+    }
+    .profile-container > img {
+        width: 100vw;
+    }
+    .profile-pic {
+        width: 120px;
+    }
+    .btn-open-popup {
+        margin-top: -45px;
+        padding: 6px 12px;
+        font-size: 15px;
+    }
+}
